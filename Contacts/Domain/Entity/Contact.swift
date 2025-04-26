@@ -5,18 +5,9 @@
 //  Created by Abhishek Shukla on 14/04/25.
 //
 
-import SwiftData
+import Foundation
 
-@Model
-final class Contact: Identifiable, Hashable {
-    static func == (lhs: Contact, rhs: Contact) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
+struct Contact: Identifiable, Hashable {
     var id: String
     var firstName: String
     var lastName: String

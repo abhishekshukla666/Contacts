@@ -28,9 +28,9 @@ struct ContactRow: View {
                     .foregroundColor(.secondary)
             }
             
-//            Spacer()
-//            Image(systemName: "chevron.right")
-//                .foregroundColor(.secondary)
+            Spacer()
+            Image(systemName: "chevron.right")
+                .foregroundColor(.secondary)
         }
     }
 }

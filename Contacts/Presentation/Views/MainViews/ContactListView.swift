@@ -6,15 +6,12 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct ContactListView: View {
     
-    @Environment(\.modelContext) var context
-    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var routeManager: NavigationRouter
     @EnvironmentObject var viewModel: ContactListViewModel
-    @Query private var contacts: [Contact]
+
     @State private var showAddContactSheet: Bool = false
     @State private var searchText: String = ""
     
@@ -25,14 +22,12 @@ struct ContactListView: View {
     var body: some View {
         NavigationStack(path: $routeManager.routes) {
             List {
-                ForEach(contacts) { contact in
-                    NavigationLink(destination: ContactDetailsView(contact: contact)) {
+                ForEach(searchResults) { contact in
                         ContactRow(contact: contact)
                             .swipeActions {
                                 Button {
                                     withAnimation {
-                                        context.remove(contact)
-//                                        viewModel.deleteContact(contact)
+                                        viewModel.deleteContact(contact)
                                     }
                                 } label: {
                                     Image(systemName: "trash")
@@ -52,7 +47,6 @@ struct ContactListView: View {
                                 routeManager.navigate(to: Route.contactDetails(contact: contact))
                             }
                     }
-                }
             }
             .navigationTitle(Text("Contacts"))
             .toolbar {
@@ -69,12 +63,12 @@ struct ContactListView: View {
                     }
                 }
             }
-//            .navigationDestination(for: Route.self) { route in
-//                switch route {
-//                case .contactDetails(let contact):
-//                    ContactDetailsView(contact: contact)
-//                }
-//            }
+            .navigationDestination(for: Route.self) { route in
+                switch route {
+                case .contactDetails(let contact):
+                    ContactDetailsView(contact: contact)
+                }
+            }
         }
         .searchable(text: $searchText, prompt: "Search")
         .sheet(isPresented: $showAddContactSheet) {

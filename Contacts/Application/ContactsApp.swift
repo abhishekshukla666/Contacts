@@ -18,7 +18,6 @@ struct ContactsApp: App {
     var body: some Scene {
         WindowGroup {
             ContactListView()
-                .modelContainer(for: Contact.self)
                 .environmentObject(viewModel)
                 .environmentObject(routerManager)
         }

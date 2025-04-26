@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AddNewContact: View {
     
-    @Environment(\.modelContext) var context
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var viewModel: ContactListViewModel
     @State private var firstName: String = ""
@@ -42,8 +41,7 @@ struct AddNewContact: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button("Save") {
                             let newContact = Contact(id: UUID().uuidString, firstName: firstName, lastName: lastName, email: email)
-//                            viewModel.addContact(newContact)
-                            context.insert(newContact)
+                            viewModel.addContact(newContact)
                             dismiss()
                         }
                     }

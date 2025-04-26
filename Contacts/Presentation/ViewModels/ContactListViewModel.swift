@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 class ContactListViewModel: ObservableObject {
     
     @Published var contacts: [Contact] = []
