@@ -7,22 +7,8 @@
 
 import SwiftUI
 
-enum Route {
+enum Route: Hashable {
     case contactDetails(contact: Contact)
-}
-
-extension Route: Hashable {
-    
-    static func ==(lhs: Route, rhs: Route) -> Bool {
-        switch (lhs, rhs) {
-        case (.contactDetails(let lhsContact), .contactDetails(let rhsContact)):
-            return lhsContact.id == rhsContact.id
-        }
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.hashValue)
-    }
 }
 
 extension Route: View {
